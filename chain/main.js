@@ -1,62 +1,10 @@
 import { Chain } from "./chain.js";
-
-// const chain = new Chain();
-
-// const textArea = document.getElementById('floatingTextarea2');
-// const btn = document.getElementById('btn');
-// const cardsContainer = document.getElementById('cards-container');
-
-// const clearTextArea = () => textArea.value = '';
-
-// const userValue = () => {
-//     const value = textArea.value.trim();
-//     if(value === '') {
-//         return null;
-//     }
-//     clearTextArea();
-//     return value;
-// }
-
-// const generateHTML = (data) => {
-//     return data.map(data => {
-//         return `
-//             <div class="card">
-//             <h3>Transaction Details</h3>
-//                 <p><strong>Timestamp:</strong> ${data.timeStamp}</p>
-//                 <p><strong>Value: ${data.value}</strong></p>
-//                 <p><strong>Hash:</strong> ${data.hash}</p>
-//                 <p><strong>Previous Hash:</strong> ${data.previousHash}</p>
-//                 <p><strong>Merkle Root:</strong> ${data.merkleRoot}</p>
-//             </div>
-//         `
-//     });
-// }
-
-// const injectHTML = (data) => {
-//     const htmlBody = generateHTML(data);
-//     cardsContainer.innerHTML = htmlBody;
-// } 
-
-
-// const initiateChain = (value) => {
-//     chain.append(value);
-//     const data = chain.print();
-//     return data;
-// }
-
-// const main = () => {
-//     const userData = userValue();
-//     const chainData = initiateChain(userData);
-    
-//     injectHTML(chainData);
-//     console.log(chainData);
-// }
-
-// btn.addEventListener("click", main);
+import { getTreeData } from "./merkleTree.js";
 
 const textArea = document.getElementById('floatingTextarea2');
 const btn = document.getElementById('btn');
 const clearBtn = document.getElementById('clear-btn');
+const treeBtn = document.getElementById('print-tree');
 const cardsContainer = document.getElementById('cards-container');
 
 const clearTextArea = () => {
@@ -66,17 +14,17 @@ const clearTextArea = () => {
 const handleUserInput = (chain) => {
   const value = textArea.value.trim();
 
+  cardsContainer.style.gridTemplateColumns = "repeat(6, 0fr)";
+
   if (value === '') {
-    // Handle empty input error (e.g., display an error message)
-    return;
+    cardsContainer.innerHTML = '<h1>Enter Something JACKASS</h1>'
   }
 
   clearTextArea();
   chain.append(value);
 
-  const chainData = chain.print(); // Assuming `chain.print` returns an array
+  const chainData = chain.print(); 
   injectHTML(chainData);
-  console.log(chainData);
 };
 
 const clearUI = (chain) => {
@@ -97,17 +45,43 @@ const generateHTML = (data) => {
   `);
 };
 
+const generateTreeHTML = (data) => {
+    return data.map((item) => `
+        <div class="card">
+            <h3>Merkle Data</h3>
+            <p><strong>Value:</strong> ${item.value}</p>
+            <p><strong>Content:</strong> ${item.content}</p>
+        </div>
+  `);
+}
+
+const printTreeData = (chain) => {
+    const data = chain.getValues();
+    const treeData = getTreeData(data);
+    const treeHTML = generateTreeHTML(treeData);
+    
+    cardsContainer.innerHTML = '';
+    cardsContainer.style.gridTemplateColumns = "repeat(1, 0fr)";
+
+    treeHTML.forEach(element => {
+        cardsContainer.innerHTML += element;
+    });
+}
+
+
+
 const injectHTML = (data) => {
   const htmlBody = generateHTML(data);
   cardsContainer.innerHTML = htmlBody;
 };
 
-// Dependency injection (example with a concrete implementation)
-const chain = new Chain(); // Replace with your chain logic
+
+const chain = new Chain(); 
 
 const main = () => {
   btn.addEventListener('click', () => handleUserInput(chain));
   clearBtn.addEventListener('click', () => clearUI(chain));
+  treeBtn.addEventListener('click', () => printTreeData(chain));
 };
 
 main();

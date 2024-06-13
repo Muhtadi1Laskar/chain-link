@@ -77,3 +77,7 @@ button {
 label {
     color: #15F5BA;
 }
+
+#print-tree {
+    width: 8rem;
+}

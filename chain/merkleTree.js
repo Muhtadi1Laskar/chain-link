@@ -82,3 +82,9 @@ export const getTreeRoot = (values) => {
     const root = tree.getRootValue();
     return root;
 }
+
+export const getTreeData = (values) => {
+    const tree = new MerkleTree(values);
+    const data = tree.print();
+    return data;
+}
