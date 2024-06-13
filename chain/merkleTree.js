@@ -77,5 +77,8 @@ class MerkleTree {
 const values = ['C', 'JavaScript', 'Python', 'Go', 'Haskell', 'Odin'];
 const tree = new MerkleTree(values);
 
-console.log(tree.getRootValue());
-// console.log(tree.print());
+export const getTreeRoot = (values) => {
+    const tree = new MerkleTree(values);
+    const root = tree.getRootValue();
+    return root;
+}
