@@ -23,12 +23,12 @@ class Chain {
     }
 
     append(value) {
-        if(value.length === 0) {
+        if (value.length === 0) {
             return 'Value cannot be empty';
         }
         const newNode = new Node(value);
 
-        if(this.isEmpty()) {
+        if (this.isEmpty()) {
             this.head = newNode;
             this.tail = this.head;
             this.length += 1;
@@ -43,4 +43,47 @@ class Chain {
 
         return;
     }
+
+    print() {
+        if (this.isEmpty()) {
+            return 'The list is empty';
+        }
+        let array = [];
+        let currentNode = this.head;
+
+        while (currentNode) {
+            array.push({
+                value: currentNode.value,
+                hash: currentNode.hash,
+                previousHash: currentNode.previousHash
+            });
+            currentNode = currentNode.next;
+        }
+        return array;
+    }
+
+    getValues() {
+        if (this.isEmpty()) {
+            return 'The list is empty';
+        }
+        let array = [];
+        let currentNode = this.head;
+
+        while (currentNode) {
+            array.push(currentNode.value);
+            currentNode = currentNode.next;
+        }
+        return array;
+    }
 }
+
+const chain = new Chain();
+
+chain.append('C');
+chain.append('JavaScript');
+chain.append('Python');
+chain.append('Go');
+chain.append('Haskell');
+chain.append('Odin');
+
+console.log(chain.print());
