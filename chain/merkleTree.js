@@ -55,9 +55,27 @@ class MerkleTree {
     getRootValue() {
         return this.root.value;
     }
+
+    print() {
+        let nodes = [];
+        this.__collectNodes(this.root, nodes);
+        return nodes;
+    }
+
+    __collectNodes(node, nodes) {
+        if(node) {
+            nodes.push({
+                value: node.value,
+                content: node.content
+            });
+            this.__collectNodes(node.left, nodes);
+            this.__collectNodes(node.right, nodes);
+        }
+    }
 }
 
 const values = ['C', 'JavaScript', 'Python', 'Go', 'Haskell', 'Odin'];
 const tree = new MerkleTree(values);
 
-console.log(tree.root);
+console.log(tree.getRootValue());
+// console.log(tree.print());
