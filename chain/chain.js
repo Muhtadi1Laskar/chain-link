@@ -11,7 +11,7 @@ class Node {
     }
 }
 
-class Chain {
+export class Chain {
     constructor() {
         this.head = null;
         this.tail = null;
@@ -55,10 +55,11 @@ class Chain {
 
         while (currentNode) {
             array.push({
+                timeStamp: currentNode.timeStamp,
                 value: currentNode.value,
                 hash: currentNode.hash,
                 previousHash: currentNode.previousHash,
-                merkleRoot: currentNode.merkleRoot || ''
+                merkleRoot: currentNode.merkleRoot
             });
             currentNode = currentNode.next;
         }
@@ -81,24 +82,24 @@ class Chain {
 
     setMerkleRoot() {
         const root = this.getMerkleRoot();
-        this.head.merkleRoot = root;
+        this.tail.merkleRoot = root;
     }
 
     getMerkleRoot() {
         const data = this.getValues();
         const root = getTreeRoot(data);
         return root;
-    } 
+    }
 }
 
-const chain = new Chain();
+// const chain = new Chain();
 
-chain.append('C');
-chain.append('JavaScript');
-chain.append('Python');
-chain.append('Go');
-chain.append('Haskell');
-chain.append('Odin');
+// chain.append('C');
+// chain.append('JavaScript');
+// chain.append('Python');
+// chain.append('Go');
+// chain.append('Haskell');
+// chain.append('Odin');
 
-console.log(chain.print());
-console.log(chain.getMerkleRoot());
+// console.log(chain.print());
+// console.log(chain.getMerkleRoot());
