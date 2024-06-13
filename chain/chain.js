@@ -90,6 +90,13 @@ export class Chain {
         const root = getTreeRoot(data);
         return root;
     }
+
+    clearChain() {
+        this.head = null;
+        this.tail = this.head;
+        this.length = 0;
+        return;
+    }
 }
 
 // const chain = new Chain();
