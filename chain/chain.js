@@ -32,6 +32,7 @@ class Chain {
             this.head = newNode;
             this.tail = this.head;
             this.length += 1;
+            this.setMerkleRoot();
             return;
         }
         let prevHash = this.tail.hash;
@@ -39,6 +40,7 @@ class Chain {
         this.tail.next = newNode;
         this.tail = newNode;
         newNode.previousHash = prevHash;
+        this.setMerkleRoot();
         this.length++;
 
         return;
@@ -55,7 +57,8 @@ class Chain {
             array.push({
                 value: currentNode.value,
                 hash: currentNode.hash,
-                previousHash: currentNode.previousHash
+                previousHash: currentNode.previousHash,
+                merkleRoot: currentNode.merkleRoot || ''
             });
             currentNode = currentNode.next;
         }
@@ -75,6 +78,17 @@ class Chain {
         }
         return array;
     }
+
+    setMerkleRoot() {
+        const root = this.getMerkleRoot();
+        this.head.merkleRoot = root;
+    }
+
+    getMerkleRoot() {
+        const data = this.getValues();
+        const root = getTreeRoot(data);
+        return root;
+    } 
 }
 
 const chain = new Chain();
@@ -87,3 +101,4 @@ chain.append('Haskell');
 chain.append('Odin');
 
 console.log(chain.print());
+console.log(chain.getMerkleRoot());
