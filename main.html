@@ -3,12 +3,18 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>Chain Link</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
+        <div class="container">
+            <textarea placeholder="Enter your text here..." id="textInput"></textarea>
+            <button class="btn" id="btn">Submit</button>
+            <div class="cards-container" id="cardsContainer"></div>
+        </div>
+
         <script src="Hash/hashes.js"></script>
         <script type="module" src="Hash/sha256.js"></script>
         <script type="module" src="chain/merkleTree.js"></script>
