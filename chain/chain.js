@@ -5,8 +5,8 @@ class Node {
     constructor(value) {
         this.timeStamp = `${new Date()}`;
         this.value = value;
-        this.hash = sha256(this.timeStamp + this.value);
         this.previousHash = '';
+        this.hash = sha256(this.timeStamp + this.value + this.previousHash);
         this.next = null;
     }
 }
@@ -44,6 +44,41 @@ export class Chain {
         this.length++;
 
         return;
+    }
+
+    update(index, newValue) {
+        let nodeToUpdate = this.getNodeByIndex(index);
+        console.log(nodeToUpdate.value);
+        nodeToUpdate.value = newValue;
+
+
+        let currentNode = nodeToUpdate;
+        let prevHash = currentNode.previousHash;
+
+        while(currentNode) {
+            currentNode.timeStamp = `${new Date()}`;
+            currentNode.hash = sha256(currentNode.timeStamp + currentNode.value + currentNode.previousHash);
+            currentNode.previousHash = prevHash;
+            prevHash = currentNode.hash;
+            currentNode = currentNode.next;
+        }
+        return;
+    }
+
+    getNodeByIndex(index) {
+        if(this.isEmpty()) {
+            return "The list is empty";
+        }
+        let currentNode = this.head;
+
+        for(let i=1;i<index;i++) {
+            currentNode = currentNode.next;
+        }
+        return currentNode;
+    }
+
+    getLenght() {
+        return this.length;
     }
 
     print() {
@@ -99,14 +134,19 @@ export class Chain {
     }
 }
 
-// const chain = new Chain();
+const chain = new Chain();
 
-// chain.append('C');
-// chain.append('JavaScript');
-// chain.append('Python');
-// chain.append('Go');
-// chain.append('Haskell');
-// chain.append('Odin');
+chain.append('C');
+chain.append('JavaScript');
+chain.append('Python');
+chain.append('Go');
+chain.append('Haskell');
+chain.append('Odin');
 
-// console.log(chain.print());
+console.log(chain.print());
 // console.log(chain.getMerkleRoot());
+
+// console.log(chain.getLenght());
+console.log(chain.update(3, 'Assemblt'));
+
+console.log(chain.print());
