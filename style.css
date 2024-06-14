@@ -104,3 +104,40 @@ label {
     font-size: 18px;
     font-weight: 500
 }
+
+/* .navbar {
+    background-color: #F0F3FF;
+    color: #211951;
+    border-radius: 10px;
+    font-size: large;
+    font-weight: 500;
+    text-align: center;
+}
+
+.nav-link {
+    color: #211951;
+} */
+
+.nav {
+    display: flex;
+    justify-content: center;
+    justify-self: center;
+    justify-items: center;
+    margin: 10px;
+    background-color: #F0F3FF;
+    width: 20rem;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 500;
+    color: #211951;
+}
+
+.nav-link  {
+    /* background-color: #15F5BA; */
+    color: #211951;
+}
+
+.nav:hover {
+    background-color: #15F5BA;
+}
+.nav-link:hover { color: #F0F3FF; }
