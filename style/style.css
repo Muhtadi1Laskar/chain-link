@@ -105,19 +105,6 @@ label {
     font-weight: 500
 }
 
-/* .navbar {
-    background-color: #F0F3FF;
-    color: #211951;
-    border-radius: 10px;
-    font-size: large;
-    font-weight: 500;
-    text-align: center;
-}
-
-.nav-link {
-    color: #211951;
-} */
-
 .nav {
     display: flex;
     justify-content: center;
@@ -125,11 +112,12 @@ label {
     justify-items: center;
     margin: 10px;
     background-color: #F0F3FF;
-    width: 20rem;
+    width: 32rem;
     border-radius: 5px;
     font-size: 20px;
     font-weight: 500;
     color: #211951;
+    flex-direction: row;
 }
 
 .nav-link  {
@@ -141,3 +129,60 @@ label {
     background-color: #15F5BA;
 }
 .nav-link:hover { color: #F0F3FF; }
+
+.input-card {
+    display: grid;
+    justify-content: center;
+    margin: 2rem;
+    justify-items: center;
+}
+
+.hash-input {
+    display: flex;
+    margin: 14px;
+    flex-direction: column-reverse;
+}
+
+.input-hash {
+    background: #211951;
+    color: #15F5BA;
+    border-color: #211951;
+    border-radius: 5px;
+    height: 50px;
+    width: 10rem;
+    margin-bottom: 10px;
+}
+
+#select {
+    background-color: #211951;
+    color: #15F5BA;
+    border-color: #211951;
+}
+
+.hash-output {
+    background-color: #211951;
+    padding: 35px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 20px;
+    color: #15F5BA;
+}
+
+#hash-submit-btn {
+    margin-top: 40px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 7rem;
+    height: 3rem;
+    color: #211951;
+    background: #15F5BA;
+    border-color: #15F5BA;
+    font-weight: 500;
+}
+
+#hash-submit-btn:hover {
+    color: #15F5BA;
+    background: #211951;
+    border-color: #211951;
+}
