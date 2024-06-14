@@ -15,6 +15,7 @@ const handleUserInput = (chain) => {
   const value = textArea.value.trim();
 
   cardsContainer.style.gridTemplateColumns = "repeat(6, 0fr)";
+  btn.innerText = "Submit";
 
   if (value === '') {
     cardsContainer.innerHTML = '<h1>Enter Something JACKASS</h1>'
@@ -60,6 +61,7 @@ const printTreeData = (chain) => {
     const treeData = getTreeData(data);
     const treeHTML = generateTreeHTML(treeData);
     
+    btn.innerText = 'Show Transaction';
     cardsContainer.innerHTML = '';
     cardsContainer.style.gridTemplateColumns = "repeat(1, 0fr)";
 
