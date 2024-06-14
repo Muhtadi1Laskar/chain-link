@@ -5,7 +5,23 @@ const outputTag = document.getElementById('output');
 
 
 const renderSelectOption = () => {
-    const options = ['md4', 'md5', 'sha1', 'sha256'];
+    const options = [
+        'blake2b', 
+        'sha224', 
+        'sha512', 
+        'md5', 
+        'sha384', 
+        'sha3_224', 
+        'sha3_256', 
+        'blake2s', 
+        'sha3_384', 
+        'sha3_256',
+        'sha256',
+        'sha1',
+        'shake_256',
+        'shake_128',
+        'sha3_512'
+    ];
 
     options.forEach((elem, index) => {
         const optionTag = document.createElement('option');
@@ -25,7 +41,7 @@ const convertData = () => {
 
     fetchData(userData, optionValue).then(res => {
         console.log(res);
-        renderHTML(res.Digest);
+        renderHTML(res.hash_type);
     });
 
     textAreaTag.value = '';
@@ -36,21 +52,25 @@ const renderHTML = (value) => {
     outputTag.innerText = value;
 }
 
-const fetchData = async (value, hashType) => {
-    const URL = `https://api.hashify.net/hash/${hashType}/hex?value=${value}`;
+const fetchData = async (value, hashType = 'sha256') => {
+    const URL = `https://cottony-amusing-cyclamen.glitch.me/hash/${hashType}/${value}`;
+    const requestOptions = {
+        method: "GET",
+        redirect: "follow",
+    };
+
     try {
-        const response = await fetch(URL);
-        if(response.ok) {
-            const data = await response.json();
-            return data;
-        } 
-        else {
-            throw new Error(`API request failed with status: ${response.status}`);
+        const response = await fetch(URL, requestOptions);
+        if (response.ok) {
+            const result = await response.json();
+            return result;
+        } else {
+            console.error(`Error fetching data: ${response.status}`);
         }
     } catch (error) {
-        console.error("Error fetching data: ", error);
+        console.error(error);
     }
-}
+};
 
 fetchData('hello world', 'sha256').then(res => console.log(res));
 
