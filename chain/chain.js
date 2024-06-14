@@ -48,9 +48,7 @@ export class Chain {
 
     update(index, newValue) {
         let nodeToUpdate = this.getNodeByIndex(index);
-        console.log(nodeToUpdate.value);
         nodeToUpdate.value = newValue;
-
 
         let currentNode = nodeToUpdate;
         let prevHash = currentNode.previousHash;
@@ -143,10 +141,10 @@ chain.append('Go');
 chain.append('Haskell');
 chain.append('Odin');
 
-console.log(chain.print());
+// console.log(chain.print());
 // console.log(chain.getMerkleRoot());
 
 // console.log(chain.getLenght());
-console.log(chain.update(3, 'Assemblt'));
+// console.log(chain.update(3, 'Assemblt'));
 
-console.log(chain.print());
+// console.log(chain.print());

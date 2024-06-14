@@ -88,3 +88,5 @@ export const getTreeData = (values) => {
     const data = tree.print();
     return data;
 }
+
+console.log(getTreeData(['C', 'JavaScript', 'Python', 'Go']));
